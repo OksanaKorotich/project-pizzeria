@@ -347,9 +347,9 @@
 
       thisCart.dom.deliveryFee.innerHTML = deliveryFee;
       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-      thisCart.dom.totalPrice.innerHTML = subtotalPrice + deliveryFee;
+      thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
       thisCart.dom.totalNumber.innerHTML = totalNumber;
-      thisCart.dom.cartSummary.innerHTML = subtotalPrice + deliveryFee;
+      thisCart.dom.cartSummary.innerHTML = thisCart.totalPrice;
       console.log('totalPrice', thisCart.totalPrice);
     }
 

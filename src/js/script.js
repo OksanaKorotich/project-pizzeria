@@ -343,12 +343,12 @@
         deliveryFee = 0;
       }
 
-      let totalPrice = subtotalPrice + deliveryFee;
+      thisCart.totalPrice = subtotalPrice + deliveryFee;
 
       thisCart.dom.deliveryFee.innerHTML = deliveryFee;
       thisCart.dom.subtotalPrice.innerHTML = subtotalPrice;
-      thisCart.dom.totalPrice.innerHTML = totalPrice;
-      thisCart.dom.cartSummary.innerHTML = totalPrice;
+      thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
+      thisCart.dom.cartSummary.innerHTML = thisCart.totalPrice;
       thisCart.dom.totalNumber.innerHTML = totalNumber;
       console.log('totalPrice', thisCart.totalPrice);
     }
