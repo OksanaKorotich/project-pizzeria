@@ -362,7 +362,7 @@
           console.log('parsedResponse', parsedResponse);
         });
 
-      //fetch(url, options);
+      fetch(url, options);
     }
 
 
@@ -370,10 +370,8 @@
       const thisCart = this;
       const cartContainer = document.querySelector(select.cart.productList);
       const generatedHTML = templates.cartProduct(menuProduct);
-      console.log('generatedHTML', generatedHTML);
       const generatedDOM = utils.createDOMFromHTML(generatedHTML);
       cartContainer.appendChild(generatedDOM);
-      console.log('adding product', menuProduct);
       thisCart.products.push(new CartProduct(menuProduct, generatedDOM));
       thisCart.update();
     }
@@ -387,7 +385,6 @@
         thisCart.totalNumber += 1;
         thisCart.subtotalPrice += thisCart.products[product].price;
       }
-      console.log('UPDATE:', this.update);
 
       if(thisCart.subtotalPrice == 0){
         thisCart.deliveryFee = 0;
@@ -399,7 +396,6 @@
       thisCart.dom.subtotalPrice.innerHTML = thisCart.subtotalPrice;
       thisCart.dom.totalPrice.innerHTML = thisCart.totalPrice;
       thisCart.dom.totalNumber.innerHTML = thisCart.totalNumber;
-      console.log('totalPrice', thisCart.totalPrice);
     }
 
     remove(productForRemove){
@@ -442,7 +438,6 @@
       thisCartProduct.dom.amountWidget.addEventListener('update', function(event){
         thisCartProduct.price = thisCartProduct.amountWidget.value * thisCartProduct.priceSingle;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
-        console.log('result:' , thisCartProduct.price);
       });
     }
 
@@ -464,11 +459,10 @@
       const event = new CustomEvent('remove' , {
         bubbles: true,
         detail: {
-          cartProduct: thisCartProduct
+          cartProduct: thisCartProduct,
         },
       });
       thisCartProduct.dom.wrapper.dispatchEvent(event);
-      console.log('tthisCartProduct.dom.wrapper' , thisCartProduct.dom.wrapper);
     }
 
     initActions(){
@@ -490,7 +484,7 @@
         name: thisCartProduct.name,
         amount: thisCartProduct.amount,
         priceSingle: thisCartProduct.priceSingle,
-        price: thisCartProduct.Price
+        price: thisCartProduct.price
       };
       return readyCartProduct;
     }
