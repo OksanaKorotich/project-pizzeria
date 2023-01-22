@@ -3,40 +3,40 @@ import { settings, select, templates, classNames} from './settings.js';
 import AmountWidget from './AmountWidget.js';
 
 class CartProduct{
-    constructor(menuProduct, element){
-      const thisCartProduct = this;
-      thisCartProduct.id = menuProduct.id;
-      thisCartProduct.amount = menuProduct.amount;
-      thisCartProduct.name = menuProduct.name;
-      thisCartProduct.params = menuProduct.params;
-      thisCartProduct.priceSingle = menuProduct.priceSingle;
-      thisCartProduct.price = menuProduct.price;
-      thisCartProduct.getElements(element);
-      thisCartProduct.initAmountWidget();
-      thisCartProduct.initActions();
-    }
+  constructor(menuProduct, element){
+    const thisCartProduct = this;
+    thisCartProduct.id = menuProduct.id;
+    thisCartProduct.amount = menuProduct.amount;
+    thisCartProduct.name = menuProduct.name;
+    thisCartProduct.params = menuProduct.params;
+    thisCartProduct.priceSingle = menuProduct.priceSingle;
+    thisCartProduct.price = menuProduct.price;
+    thisCartProduct.getElements(element);
+    thisCartProduct.initAmountWidget();
+    thisCartProduct.initActions();
+  }
 
-    getElements(element){
-      const thisCartProduct = this;
-      thisCartProduct.dom = {};
-      thisCartProduct.dom.wrapper = element;
-      thisCartProduct.dom.amountWidget = element.querySelector(select.cartProduct.amountWidget);
-      thisCartProduct.dom.price = element.querySelector(select.cartProduct.price);
-      thisCartProduct.dom.edit = element.querySelector(select.cartProduct.edit);
-      thisCartProduct.dom.remove = element.querySelector(select.cartProduct.remove);
-    }
+  getElements(element){
+    const thisCartProduct = this;
+    thisCartProduct.dom = {};
+    thisCartProduct.dom.wrapper = element;
+    thisCartProduct.dom.amountWidget = element.querySelector(select.cartProduct.amountWidget);
+    thisCartProduct.dom.price = element.querySelector(select.cartProduct.price);
+    thisCartProduct.dom.edit = element.querySelector(select.cartProduct.edit);
+    thisCartProduct.dom.remove = element.querySelector(select.cartProduct.remove);
+  }
 
-    initAmountWidget(){
-      const thisCartProduct = this;
-      thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
-      thisCartProduct.dom.amountWidget.addEventListener('update', function(event){
-        thisCartProduct.price = thisCartProduct.amountWidget.value * thisCartProduct.priceSingle;
-        thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
-        //thisCartProduct.update();
-      });
-    }
+  initAmountWidget(){
+    const thisCartProduct = this;
+    thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
+    thisCartProduct.dom.amountWidget.addEventListener('update', function(event){
+      thisCartProduct.price = thisCartProduct.amountWidget.value * thisCartProduct.priceSingle;
+      thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
+      //thisCartProduct.update();
+    });
+  }
 
-   /* update(){
+  /* update(){
         const thisCartProduct = this;
         thisCartProduct.price = thisCartProduct.amountWidget.value * thisCartProduct.priceSingle;
         app.cart.update();
@@ -56,40 +56,40 @@ class CartProduct{
       });
     }*/
 
-    remove(){
-      const thisCartProduct = this;
-      const event = new CustomEvent('remove' , {
-        bubbles: true,
-        detail: {
-          cartProduct: thisCartProduct,
-        },
-      });
-      thisCartProduct.dom.wrapper.dispatchEvent(event);
-    }
+  remove(){
+    const thisCartProduct = this;
+    const event = new CustomEvent('remove' , {
+      bubbles: true,
+      detail: {
+        cartProduct: thisCartProduct,
+      },
+    });
+    thisCartProduct.dom.wrapper.dispatchEvent(event);
+  }
 
-    initActions(){
-      const thisCartProduct = this;
-      thisCartProduct.dom.edit.addEventListener('click' , function(event){
-        event.preventDefault();
-      });
-      thisCartProduct.dom.remove.addEventListener('click' , function(event){
-        event.preventDefault();
-        thisCartProduct.remove();
-      });
-    }
+  initActions(){
+    const thisCartProduct = this;
+    thisCartProduct.dom.edit.addEventListener('click' , function(event){
+      event.preventDefault();
+    });
+    thisCartProduct.dom.remove.addEventListener('click' , function(event){
+      event.preventDefault();
+      thisCartProduct.remove();
+    });
+  }
 
-    getData(){
-      const thisCartProduct = this;
+  getData(){
+    const thisCartProduct = this;
 
-      const readyCartProduct = {
-        id : thisCartProduct.id,
-        name: thisCartProduct.name,
-        amount: thisCartProduct.amount,
-        priceSingle: thisCartProduct.priceSingle,
-        price: thisCartProduct.price
-      };
-      return readyCartProduct;
-    }
+    const readyCartProduct = {
+      id : thisCartProduct.id,
+      name: thisCartProduct.name,
+      amount: thisCartProduct.amount,
+      priceSingle: thisCartProduct.priceSingle,
+      price: thisCartProduct.price
+    };
+    return readyCartProduct;
+  }
 }
 
 export default CartProduct;
